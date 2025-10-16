@@ -366,11 +366,37 @@ public class FinancialTracker {
        Reporting helpers
        ------------------------------------------------------------------ */
     private static void filterTransactionsByDate(LocalDate start, LocalDate end) {
-        // TODO – iterate transactions, print those within the range
+        System.out.println("Date----------Time---------Description--------------------Vendor--------------Amount");
+        System.out.println("=======================================================================================");
+
+        for (Transaction transaction : transactions) {
+            LocalDate date = transaction.getDate();
+            if (!date.isBefore(start) && !date.isAfter(end)){
+                System.out.printf("%-12s %-10s %-30s %-20s %10.2f \n",
+                        transaction.getDate(),
+                        transaction.getTime(),
+                        transaction.getDescription(),
+                        transaction.getVendor(),
+                        transaction.getAmount());
+            }
+        }
     }
 
     private static void filterTransactionsByVendor(String vendor) {
-        // TODO – iterate transactions, print those with matching vendor
+        System.out.println("Date----------Time---------Description--------------------Vendor--------------Amount");
+        System.out.println("=======================================================================================");
+
+        for (Transaction transaction : transactions) {
+            String vendor2 = transaction.getVendor();
+            if (vendor2.equalsIgnoreCase(vendor)){
+                System.out.printf("%-12s %-10s %-30s %-20s %10.2f \n",
+                        transaction.getDate(),
+                        transaction.getTime(),
+                        transaction.getDescription(),
+                        transaction.getVendor(),
+                        transaction.getAmount());
+            }
+        }
     }
 
     private static void customSearch(Scanner scanner) {
