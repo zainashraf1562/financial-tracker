@@ -1,9 +1,6 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -41,10 +38,10 @@ public class FinancialTracker {
         loadTransactions(FILE_NAME);
 
         Scanner scanner = new Scanner(System.in);
-        boolean running = true;
+        boolean run = true;
 
-        while (running) {
-            System.out.println("Welcome to TransactionApp");
+        while (run) {
+            System.out.println("Welcome!!");
             System.out.println("Choose an option:");
             System.out.println("D) Add Deposit");
             System.out.println("P) Make Payment (Debit)");
@@ -57,7 +54,7 @@ public class FinancialTracker {
                 case "D" -> addDeposit(scanner);
                 case "P" -> addPayment(scanner);
                 case "L" -> ledgerMenu(scanner);
-                case "X" -> running = false;
+                case "X" -> run = false;
                 default -> System.out.println("Invalid option");
             }
         }
@@ -106,7 +103,66 @@ public class FinancialTracker {
      * Store the amount as-is (positive) and append to the file.
      */
     private static void addDeposit(Scanner scanner) {
-        // TODO
+        LocalDate dateFormatted = null;
+        LocalTime timeFormatted = null;
+        boolean validDate = false;
+
+        while(!validDate) {
+            try {
+                System.out.println("Date (yyyy-MM-dd):");
+                String date = scanner.nextLine();
+                dateFormatted = LocalDate.parse(date, DATE_FMT);
+                validDate = true;
+            } catch (Exception e) {
+                System.out.println("invalid date \n");
+            }
+        }
+        boolean validTime = false;
+
+        while(!validTime) {
+            try {
+                System.out.println("Time(HH:mm:ss):");
+                String time = scanner.nextLine();
+                timeFormatted = LocalTime.parse(time, TIME_FMT);
+                validTime = true;
+            } catch (Exception e) {
+                System.out.println("Invalid time. Please input time based on format (HH:mm:ss) \n");
+            }
+        }
+        System.out.println("Enter Description:");
+        String description = scanner.nextLine();
+
+        System.out.println("Enter Vendor:");
+        String vendor = scanner.nextLine();
+
+        double positiveAmount = 0.0;
+        boolean validAmount = false;
+
+        while(!validAmount) {
+            try {
+                System.out.println("Amount (positive):");
+                positiveAmount = Double.parseDouble(scanner.nextLine());
+                if (positiveAmount <= 0){
+                    System.out.println("Invalid number. Please enter a positive number greater than zero");
+                } else {
+                    validAmount = true;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number");
+            }
+        }
+
+        transactions.add(new Transaction(dateFormatted, timeFormatted, description, vendor, positiveAmount));
+
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true));
+            writer.write(dateFormatted.format(DATE_FMT) + "|" + timeFormatted.format(TIME_FMT)+ "|" + description + "|" + vendor + "|" + String.format("%.2f", positiveAmount));
+            writer.newLine();
+            System.out.println("Deposit Saved!");
+            writer.close();
+        } catch (Exception e) {
+            System.err.println("Error writing to file");
+        }
     }
 
     /**
@@ -115,7 +171,67 @@ public class FinancialTracker {
      * then converted to a negative amount before storing.
      */
     private static void addPayment(Scanner scanner) {
-        // TODO
+        System.out.println("FILL ALL VALUES!");
+        LocalDate dateFormatted = null;
+        LocalTime timeFormatted = null;
+        boolean validDate = false;
+
+        while(!validDate) {
+            try {
+                System.out.println("Enter Date (yyyy-MM-dd):");
+                String date = scanner.nextLine();
+                dateFormatted = LocalDate.parse(date, DATE_FMT);
+                validDate = true;
+            } catch (Exception e) {
+                System.out.println("invalid date. (yyyy-MM-dd)");
+            }
+        }
+        boolean validTime = false;
+
+        while(!validTime) {
+            try {
+                System.out.println("Enter Time (HH:mm:ss):");
+                String time = scanner.nextLine();
+                timeFormatted = LocalTime.parse(time, TIME_FMT);
+                validTime = true;
+            } catch (Exception e) {
+                System.out.println("Invalid time. (HH:mm:ss)");
+            }
+        }
+        System.out.println("Enter Description:");
+        String description = scanner.nextLine();
+
+        System.out.println("Enter Vendor:");
+        String vendor = scanner.nextLine();
+
+        double amount = 0;
+        boolean goodAmount = false;
+
+        while(!goodAmount) {
+            try {
+                System.out.println("Enter Amount (greater than 0):");
+                amount = Double.parseDouble(scanner.nextLine());
+                if (amount <= 0){
+                    System.out.println("Invalid number. Enter Positive.");
+                } else {
+                    goodAmount = true;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a numeric value");
+            }
+        }
+
+        double negativeAmount = -Math.abs(amount);
+        transactions.add(new Transaction(dateFormatted, timeFormatted, description, vendor, negativeAmount));
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true));
+            writer.write(dateFormatted.format(DATE_FMT) + "|" + timeFormatted.format(TIME_FMT)+ "|" + description + "|" + vendor + "|" + String.format("%.2f", negativeAmount));
+            writer.newLine();
+            System.out.println("Payment recorded!");
+            writer.close();
+        } catch (IOException e) {
+            System.err.print("Error writing to the file: " + FILE_NAME);
+        }
     }
 
     /* ------------------------------------------------------------------
