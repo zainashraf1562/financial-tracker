@@ -52,7 +52,7 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 ### Demo
 
--"to-do"
+- ![Financial Tracker Demo](demoFinal.gif)
 
 ### Future Work
 
