@@ -30,6 +30,10 @@ public class FinancialTracker {
     private static final DateTimeFormatter DATE_FMT = DateTimeFormatter.ofPattern(DATE_PATTERN);
     private static final DateTimeFormatter TIME_FMT = DateTimeFormatter.ofPattern(TIME_PATTERN);
     private static final DateTimeFormatter DATETIME_FMT = DateTimeFormatter.ofPattern(DATETIME_PATTERN);
+    public static final String DEFAULT = "\u001B[0m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String BLUE = "\u001B[34m";
 
     /* ------------------------------------------------------------------
        Main menu
@@ -41,8 +45,12 @@ public class FinancialTracker {
         boolean run = true;
 
         while (run) {
-            System.out.println("Welcome!!");
-            System.out.println("Choose an option:");
+            System.out.println(BLUE + "╔═══════════════════════════════════════════════╗");
+            System.out.println(       "║  ┏━╸╻┏┓╻┏━┓┏┓╻┏━╸╻┏━┓╻  ╺┳╸┏━┓┏━┓┏━╸╻┏ ┏━╸┏━┓ ║\n" +
+                                      "║  ┣╸ ┃┃┗┫┣━┫┃┗┫┃  ┃┣━┫┃   ┃ ┣┳┛┣━┫┃  ┣┻┓┣╸ ┣┳┛ ║\n" +
+                                      "║  ╹  ╹╹ ╹╹ ╹╹ ╹┗━╸╹╹ ╹┗━╸ ╹ ╹┗╸╹ ╹┗━╸╹ ╹┗━╸╹┗  ║\n" +
+                                      "╚═══════════════════════════════════════════════╝" + DEFAULT  );
+            System.out.println("Choose An Option:");
             System.out.println("D) Add Deposit");
             System.out.println("P) Make Payment (Debit)");
             System.out.println("L) Ledger");
@@ -55,7 +63,7 @@ public class FinancialTracker {
                 case "P" -> addPayment(scanner);
                 case "L" -> ledgerMenu(scanner);
                 case "X" -> run = false;
-                default -> System.out.println("Invalid option");
+                default -> System.out.println(RED + "INVALID OPTION");
             }
         }
         scanner.close();
@@ -88,7 +96,7 @@ public class FinancialTracker {
             }
             reader.close();
         } catch (IOException e) {
-            System.err.println("Error reading file: " + FILE_NAME);
+            System.err.println(RED + "ERROR READING FILE: " + FILE_NAME);
         }
     }
 
@@ -109,24 +117,24 @@ public class FinancialTracker {
 
         while(!validDate) {
             try {
-                System.out.println("Date (yyyy-MM-dd):");
+                System.out.println("Enter Date (yyyy-MM-dd):");
                 String date = scanner.nextLine();
                 dateFormatted = LocalDate.parse(date, DATE_FMT);
                 validDate = true;
             } catch (Exception e) {
-                System.out.println("invalid date \n");
+                System.out.println(RED + "INVALID DATE \n");
             }
         }
         boolean validTime = false;
 
         while(!validTime) {
             try {
-                System.out.println("Time(HH:mm:ss):");
+                System.out.println("Enter Time (HH:mm:ss):");
                 String time = scanner.nextLine();
                 timeFormatted = LocalTime.parse(time, TIME_FMT);
                 validTime = true;
             } catch (Exception e) {
-                System.out.println("Invalid time. Please input time based on format (HH:mm:ss) \n");
+                System.out.println(RED + "Invalid Time. Use Format (HH:mm:ss) \n");
             }
         }
         System.out.println("Enter Description:");
@@ -140,15 +148,15 @@ public class FinancialTracker {
 
         while(!validAmount) {
             try {
-                System.out.println("Amount (positive):");
+                System.out.println("Enter Amount :");
                 positiveAmount = Double.parseDouble(scanner.nextLine());
                 if (positiveAmount <= 0){
-                    System.out.println("Invalid number. Please enter a positive number greater than zero");
+                    System.out.println(RED + "Invalid number. Enter Positive Number");
                 } else {
                     validAmount = true;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a number");
+                System.out.println(RED + "Invalid Input. Please Enter A Numeric Value");
             }
         }
 
@@ -161,7 +169,7 @@ public class FinancialTracker {
             System.out.println("Deposit Saved!");
             writer.close();
         } catch (Exception e) {
-            System.err.println("Error writing to file");
+            System.err.println(RED + "Error Writing To File");
         }
     }
 
@@ -183,7 +191,7 @@ public class FinancialTracker {
                 dateFormatted = LocalDate.parse(date, DATE_FMT);
                 validDate = true;
             } catch (Exception e) {
-                System.out.println("invalid date. (yyyy-MM-dd)");
+                System.out.println(RED + "Invalid Date. Use Format (yyyy-MM-dd)");
             }
         }
         boolean validTime = false;
@@ -195,7 +203,7 @@ public class FinancialTracker {
                 timeFormatted = LocalTime.parse(time, TIME_FMT);
                 validTime = true;
             } catch (Exception e) {
-                System.out.println("Invalid time. (HH:mm:ss)");
+                System.out.println(RED + "Invalid Time. Use Format (HH:mm:ss)");
             }
         }
         System.out.println("Enter Description:");
@@ -212,12 +220,12 @@ public class FinancialTracker {
                 System.out.println("Enter Amount (greater than 0):");
                 amount = Double.parseDouble(scanner.nextLine());
                 if (amount <= 0){
-                    System.out.println("Invalid number. Enter Positive.");
+                    System.out.println(RED + "Invalid Number. Enter Positive.");
                 } else {
                     goodAmount = true;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a numeric value");
+                System.out.println(RED + "Invalid Input. Please Enter A Numeric Value");
             }
         }
 
@@ -227,10 +235,10 @@ public class FinancialTracker {
             BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true));
             writer.write(dateFormatted.format(DATE_FMT) + "|" + timeFormatted.format(TIME_FMT)+ "|" + description + "|" + vendor + "|" + String.format("%.2f", negativeAmount));
             writer.newLine();
-            System.out.println("Payment recorded!");
+            System.out.println("Payment Recorded!");
             writer.close();
         } catch (IOException e) {
-            System.err.print("Error writing to the file: " + FILE_NAME);
+            System.err.print(RED + "Error Writing To The File: " + FILE_NAME);
         }
     }
 
@@ -240,7 +248,7 @@ public class FinancialTracker {
     private static void ledgerMenu(Scanner scanner) {
         boolean running = true;
         while (running) {
-            System.out.println("Ledger");
+            System.out.println(GREEN + "| LEDGER MENU |" + DEFAULT);
             System.out.println("Choose an option:");
             System.out.println("A) All");
             System.out.println("D) Deposits");
@@ -256,7 +264,7 @@ public class FinancialTracker {
                 case "P" -> displayPayments();
                 case "R" -> reportsMenu(scanner);
                 case "H" -> running = false;
-                default -> System.out.println("Invalid option");
+                default -> System.out.println(RED + "Invalid option");
             }
         }
     }
@@ -265,6 +273,8 @@ public class FinancialTracker {
        Display helpers: show data in neat columns
        ------------------------------------------------------------------ */
     private static void displayLedger() {
+        System.out.println(GREEN + "| ALL TRANSACTIONS |" + DEFAULT);
+        System.out.println();
         System.out.println("Date----------Time---------Description--------------------Vendor--------------Amount");
         System.out.println("=======================================================================================");
         try {
@@ -277,10 +287,12 @@ public class FinancialTracker {
                         transaction.getAmount());
             }
         } catch (Exception ex) {
-            System.err.println("Error");
+            System.err.println(RED + "Error");
         } }
 
     private static void displayDeposits() {
+        System.out.println(GREEN + "| DEPOSITS |" + DEFAULT);
+        System.out.println();
         System.out.println("Date----------Time---------Description--------------------Vendor--------------Amount");
         System.out.println("=======================================================================================");
 
@@ -297,6 +309,8 @@ public class FinancialTracker {
     }
 
     private static void displayPayments() {
+        System.out.println(GREEN + "| PAYMENTS |" + DEFAULT);
+        System.out.println();
         System.out.println("Date----------Time---------Description--------------------Vendor--------------Amount");
         System.out.println("=======================================================================================");
 
@@ -318,7 +332,7 @@ public class FinancialTracker {
     private static void reportsMenu(Scanner scanner) {
         boolean running = true;
         while (running) {
-            System.out.println("Reports");
+            System.out.println(GREEN + "| REPORTS MENU |" +DEFAULT);
             System.out.println("Choose an option:");
             System.out.println("1) Month To Date");
             System.out.println("2) Previous Month");
@@ -357,7 +371,7 @@ public class FinancialTracker {
                 }
                 case "6" -> customSearch(scanner);
                 case "0" -> running = false;
-                default -> System.out.println("Invalid option");
+                default -> System.out.println(RED + "Invalid Option");
             }
         }
     }
@@ -366,6 +380,8 @@ public class FinancialTracker {
        Reporting helpers
        ------------------------------------------------------------------ */
     private static void filterTransactionsByDate(LocalDate start, LocalDate end) {
+        System.out.println(GREEN + "| TRANSACTIONS BY DATE |" + DEFAULT);
+        System.out.println();
         System.out.println("Date----------Time---------Description--------------------Vendor--------------Amount");
         System.out.println("=======================================================================================");
 
@@ -383,6 +399,8 @@ public class FinancialTracker {
     }
 
     private static void filterTransactionsByVendor(String vendor) {
+        System.out.println(GREEN + "| TRANSACTIONS BY VENDOR |" + DEFAULT);
+        System.out.println();
         System.out.println("Date----------Time---------Description--------------------Vendor--------------Amount");
         System.out.println("=======================================================================================");
 
@@ -400,8 +418,56 @@ public class FinancialTracker {
     }
 
     private static void customSearch(Scanner scanner) {
-        // TODO – prompt for any combination of date range, description,
-        //        vendor, and exact amount, then display matches
+        System.out.println(GREEN + "| CUSTOM-SEARCH MENU |" + DEFAULT);
+
+        System.out.print("Start date (yyyy-MM-dd, Leave Empty for None): ");
+        String stringStartDate = scanner.nextLine().trim();
+
+        System.out.print("Enter End date (yyyy-MM-dd, Leave Empty for None): ");
+        String stringEndDate = scanner.nextLine().trim();
+
+        System.out.print("Description (Leave Empty for None): ");
+        String description = scanner.nextLine();
+
+        System.out.print("Vendor (Leave Empty for None): ");
+        String vendor = scanner.nextLine();
+
+        System.out.print("Amount (Leave Empty for None): ");
+        String amount = scanner.nextLine();
+
+        Double finalAmount = null;
+        if (!amount.isEmpty()){
+            finalAmount = Double.parseDouble(amount);
+        }
+        LocalDate startDate = null;
+        if (!stringStartDate.isEmpty()) {
+            startDate = LocalDate.parse(stringStartDate);
+        }
+        LocalDate endDate = null;
+        if (!stringEndDate.isEmpty()){
+            endDate = LocalDate.parse(stringEndDate);
+        }
+        System.out.println(GREEN + "| CUSTOM SEARCH |" + DEFAULT);
+        System.out.println("Date----------Time---------Description--------------------Vendor--------------Amount");
+        System.out.println("=======================================================================================");
+        try {
+            for (Transaction transaction : transactions) {
+                if (startDate != null && transaction.getDate().isBefore(startDate)){ continue; }
+                if (endDate != null && transaction.getDate().isAfter(endDate)) { continue; }
+                if (!description.isEmpty() && !description.equalsIgnoreCase(transaction.getDescription())) { continue; }
+                if (!vendor.isEmpty() && !vendor.equalsIgnoreCase(transaction.getVendor())) { continue; }
+                if (finalAmount != null && transaction.getAmount() != finalAmount) { continue; }
+
+                System.out.printf("%-12s %-10s %-30s %-20s %10.2f \n",
+                        transaction.getDate(),
+                        transaction.getTime(),
+                        transaction.getDescription(),
+                        transaction.getVendor(),
+                        transaction.getAmount());
+            }
+        } catch (Exception ex){
+            System.err.println(RED + "Error");
+        }
     }
 
     /* ------------------------------------------------------------------
@@ -413,7 +479,7 @@ public class FinancialTracker {
     }
 
     private static Double parseDouble(String s) {
-        /* TODO – return Double   or null */
+        /* TODO – return Double or null */
         return null;
     }
 }
