@@ -248,6 +248,7 @@ public class FinancialTracker {
     private static void ledgerMenu(Scanner scanner) {
         boolean running = true;
         while (running) {
+            System.out.println();
             System.out.println(GREEN + "| LEDGER MENU |" + DEFAULT);
             System.out.println("Choose an option:");
             System.out.println("A) All");
@@ -273,8 +274,8 @@ public class FinancialTracker {
        Display helpers: show data in neat columns
        ------------------------------------------------------------------ */
     private static void displayLedger() {
-        System.out.println(GREEN + "| ALL TRANSACTIONS |" + DEFAULT);
         System.out.println();
+        System.out.println(GREEN + "| ALL TRANSACTIONS |" + DEFAULT);
         System.out.println("Date----------Time---------Description--------------------Vendor--------------Amount");
         System.out.println("=======================================================================================");
         try {
@@ -291,8 +292,8 @@ public class FinancialTracker {
         } }
 
     private static void displayDeposits() {
-        System.out.println(GREEN + "| DEPOSITS |" + DEFAULT);
         System.out.println();
+        System.out.println(GREEN + "| DEPOSITS |" + DEFAULT);
         System.out.println("Date----------Time---------Description--------------------Vendor--------------Amount");
         System.out.println("=======================================================================================");
 
@@ -309,8 +310,8 @@ public class FinancialTracker {
     }
 
     private static void displayPayments() {
-        System.out.println(GREEN + "| PAYMENTS |" + DEFAULT);
         System.out.println();
+        System.out.println(GREEN + "| PAYMENTS |" + DEFAULT);
         System.out.println("Date----------Time---------Description--------------------Vendor--------------Amount");
         System.out.println("=======================================================================================");
 
@@ -380,8 +381,8 @@ public class FinancialTracker {
        Reporting helpers
        ------------------------------------------------------------------ */
     private static void filterTransactionsByDate(LocalDate start, LocalDate end) {
-        System.out.println(GREEN + "| TRANSACTIONS BY DATE |" + DEFAULT);
         System.out.println();
+        System.out.println(GREEN + "| TRANSACTIONS BY DATE |" + DEFAULT);
         System.out.println("Date----------Time---------Description--------------------Vendor--------------Amount");
         System.out.println("=======================================================================================");
 
@@ -399,8 +400,8 @@ public class FinancialTracker {
     }
 
     private static void filterTransactionsByVendor(String vendor) {
-        System.out.println(GREEN + "| TRANSACTIONS BY VENDOR |" + DEFAULT);
         System.out.println();
+        System.out.println(GREEN + "| TRANSACTIONS BY VENDOR |" + DEFAULT);
         System.out.println("Date----------Time---------Description--------------------Vendor--------------Amount");
         System.out.println("=======================================================================================");
 
@@ -418,6 +419,7 @@ public class FinancialTracker {
     }
 
     private static void customSearch(Scanner scanner) {
+        System.out.println();
         System.out.println(GREEN + "| CUSTOM-SEARCH MENU |" + DEFAULT);
 
         System.out.print("Start date (yyyy-MM-dd, Leave Empty for None): ");
@@ -447,6 +449,7 @@ public class FinancialTracker {
         if (!stringEndDate.isEmpty()){
             endDate = LocalDate.parse(stringEndDate);
         }
+        System.out.println();
         System.out.println(GREEN + "| CUSTOM SEARCH |" + DEFAULT);
         System.out.println("Date----------Time---------Description--------------------Vendor--------------Amount");
         System.out.println("=======================================================================================");
