@@ -1,19 +1,35 @@
-# Project Title
+# Financial Tracker
 
-## Description of the Project
 
-Briefly describe what this Java console application does. Mention its purpose and who the intended users are. Explain the main functionality and what problems it aims to solve.
+The Financial Tracker Application helps users efficiently record, manage, and review their financial transactions.
+Its main goal is to simplify personal finance management by providing an organized and user-friendly way to track income and expenses through deposits, payments, and detailed reports.
 
-## User Stories
+### CORE FEATURES
 
-List the user stories that guided the development of your application. Format these stories as: "As a [type of user], I want [some goal] so that [some reason]."
+- Add a deposit
+- Make a payment
+- View your ledger with filters
+    - View your deposits
+    - View your payments
+- View your reports (Filter Reports)
+    - Month to date
+    - Previous Month
+    - Year to date
+    - Previous Year
+    - Specific vendor
+    - Custom Search
 
-- As a user, I want to be able to input my data, so that the application can process it accordingly.
-- As a user, I want to receive immediate feedback, so I can understand what to do next.
+This application eliminates the need for manual record-keeping by offering a digital solution for managing finances. Users can easily input transactions, categorize them, and analyze spending trends to make better financial decisions.
 
-## Setup
+### User Stories
 
-Instructions on how to set up and run the project using IntelliJ IDEA.
+
+- As a user, I want to view all my transactions in a ledger, so I can easily review my financial activity in chronological order.
+- As a user, I want to add new deposits, so I can accurately track all income transactions.
+- As a user, I want to record new payments, so I can keep an organized record of all expenses.
+- As a user, I want to view reports based on specific dates, so I can analyze my transactions over different time periods.
+- As a user, I want to perform custom searches, so I can quickly find and filter specific transactions.
+- As a user, I want to see my transactions displayed in an organized list from newest to oldest, so it’s easier to read and review recent activity first.
 
 ### Prerequisites
 
@@ -30,39 +46,32 @@ Follow these steps to get your application running within IntelliJ IDEA:
 4. Find the main class with the `public static void main(String[] args)` method.
 5. Right-click on the file and select 'Run 'YourMainClassName.main()'' to start the application.
 
-## Technologies Used
+### Technologies Used
 
-- Java: Mention the version you are using.
-- Any additional libraries or frameworks used in the project.
+- Java 17
 
-## Demo
+### Demo
 
-Include screenshots or GIFs that show your application in action. Use tools like [Giphy Capture](https://giphy.com/apps/giphycapture) to record a GIF of your application.
+-"to-do"
 
-![Application Screenshot](path/to/your/screenshot.png)
+### Future Work
 
-## Future Work
+-Add user authentication and multi-user profiles.
+-Integrate a database for persistent storage.
+-Include budgeting and spending alerts.
+-Add visual reports and charts for analytics.
 
-Outline potential future enhancements or functionalities you might consider adding:
-
-- Additional feature to be developed.
-- Improvement of current functionalities.
-
-## Resources
+### Resources
 
 List resources such as tutorials, articles, or documentation that helped you during the project.
 
-- [Java Programming Tutorial](https://www.example.com)
-- [Effective Java](https://www.example.com)
+- [Oracle](https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html)
+- [Potato Sensei](https://chatgpt.com/g/g-681d378b0c90819197b16e49abe384ec-potato-sensei)
 
-## Team Members
+### Contributors
 
-- **Name 1** - Specific contributions or roles.
-- **Name 2** - Specific contributions or roles.
+- Zain Ashraf
 
-## Thanks
+### Thanks
 
-Express gratitude towards those who provided help, guidance, or resources:
-
-- Thank you to [Mentor's Name] for continuous support and guidance.
-- A special thanks to all teammates for their dedication and teamwork.
+Thank you to Potato Sensei [Raymond] for continuous support and guidance.
