@@ -24,12 +24,12 @@ This application eliminates the need for manual record-keeping by offering a dig
 ### User Stories
 
 
--As a user, I want to view all my transactions in a clear ledger, so I can easily review my financial activity in order.
--As a user, I want to add new deposits, so I can keep an accurate record of all income.
--As a user, I want to record new payments, so I can maintain an organized list of my expenses.
--As a user, I want to generate reports for specific date ranges, so I can analyze my spending and income patterns over time.
--As a user, I want to perform custom searches, so I can quickly locate and filter particular transactions.
--As a user, I want my transactions displayed from newest to oldest, so it’s simple to view and review recent activity first.
+- As a user, I want to view all my transactions in a clear ledger, so I can easily review my financial activity in order.
+- As a user, I want to add new deposits, so I can keep an accurate record of all income.
+- As a user, I want to record new payments, so I can maintain an organized list of my expenses.
+- As a user, I want to generate reports for specific date ranges, so I can analyze my spending and income patterns over time.
+- As a user, I want to perform custom searches, so I can quickly locate and filter particular transactions.
+- As a user, I want my transactions displayed from newest to oldest, so it’s simple to view and review recent activity first.
 
 ### Prerequisites
 
@@ -56,10 +56,10 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 ### Future Work
 
--Add user authentication and multi-user profiles.
--Integrate a database for persistent storage.
--Include budgeting and spending alerts.
--Add visual reports and charts for analytics.
+- Add user authentication and multi-user profiles.
+- Integrate a database for persistent storage.
+- Include budgeting and spending alerts.
+- Add visual reports and charts for analytics.
 
 ### Resources
 

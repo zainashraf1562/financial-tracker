@@ -56,18 +56,14 @@ public class FinancialTracker {
                 case "P" -> addPayment(scanner);
                 case "L" -> ledgerMenu(scanner);
                 case "X" -> run = false;
-                default -> System.out.println(RED + "INVALID OPTION");
+                default -> System.out.println(RED + "INVALID OPTION"+ DEFAULT);
             }
         }
         scanner.close();
     }
 
-    /**
-     * Load transactions from FILE_NAME.
-     * • If the file doesn’t exist, create an empty one so that future writes succeed.
-     * • Each line looks like: date|time|description|vendor|amount
-     */
-    //READ FILE add to object
+
+    //READ FILE-Loads previously saved transactions from a file into the ARRAY-LIST.
     public static void loadTransactions(String fileName) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME));
@@ -86,7 +82,7 @@ public class FinancialTracker {
             }
             reader.close();
         } catch (IOException e) {
-            System.err.println(RED + "ERROR READING FILE: " + FILE_NAME);
+            System.err.println(RED + "ERROR READING FILE: " + FILE_NAME+ DEFAULT);
         }
     }
 
@@ -94,13 +90,7 @@ public class FinancialTracker {
        Add new transactions
        ------------------------------------------------------------------ */
 
-    /**
-     * Prompt for ONE date+time string in the format
-     * "yyyy-MM-dd HH:mm:ss", plus description, vendor, amount.
-     * Validate that the amount entered is positive.
-     * Store the amount as-is (positive) and append to the file.
-     */
-    //ADD DEPOSIT
+    //ADD DEPOSIT-Records a new deposit transaction and updates the ledger with the amount and date.
     private static void addDeposit(Scanner scanner) {
         LocalDate dateFormatted = null;
         LocalTime timeFormatted = null;
@@ -113,7 +103,7 @@ public class FinancialTracker {
                 dateFormatted = LocalDate.parse(date, DATE_FMT);
                 validDate = true;
             } catch (Exception e) {
-                System.out.println(RED + "INVALID DATE \n");
+                System.out.println(RED + "INVALID DATE \n"+ DEFAULT);
             }
         }
         boolean validTime = false;
@@ -125,7 +115,7 @@ public class FinancialTracker {
                 timeFormatted = LocalTime.parse(time, TIME_FMT);
                 validTime = true;
             } catch (Exception e) {
-                System.out.println(RED + "Invalid Time. Use Format (HH:mm:ss) \n");
+                System.out.println(RED + "Invalid Time. Use Format (HH:mm:ss) \n"+ DEFAULT);
             }
         }
         System.out.println("Enter Description:");
@@ -142,12 +132,12 @@ public class FinancialTracker {
                 System.out.println("Enter Amount :");
                 positiveAmount = Double.parseDouble(scanner.nextLine());
                 if (positiveAmount <= 0){
-                    System.out.println(RED + "Invalid number. Enter Positive Number");
+                    System.out.println(RED + "Invalid number. Enter Positive Number"+ DEFAULT);
                 } else {
                     validAmount = true;
                 }
             } catch (NumberFormatException e) {
-                System.out.println(RED + "Invalid Input. Please Enter A Numeric Value");
+                System.out.println(RED + "Invalid Input. Please Enter A Numeric Value"+ DEFAULT);
             }
         }
 
@@ -160,16 +150,13 @@ public class FinancialTracker {
             System.out.println("Deposit Saved!");
             writer.close();
         } catch (Exception e) {
-            System.err.println(RED + "Error Writing To File");
+            System.err.println(RED + "Error Writing To File"+ DEFAULT);
         }
     }
 
-    /**
-     * Same prompts as addDeposit.
-     * Amount must be entered as a positive number,
-     * then converted to a negative amount before storing.
-     */
-    // ADD PAYMENT
+
+
+    // ADD PAYMENT-Records a new payment or expense and updates the ledger accordingly.
     private static void addPayment(Scanner scanner) {
         System.out.println("FILL ALL VALUES!");
         LocalDate dateFormatted = null;
@@ -183,7 +170,7 @@ public class FinancialTracker {
                 dateFormatted = LocalDate.parse(date, DATE_FMT);
                 validDate = true;
             } catch (Exception e) {
-                System.out.println(RED + "Invalid Date. Use Format (yyyy-MM-dd)");
+                System.out.println(RED + "Invalid Date. Use Format (yyyy-MM-dd)"+ DEFAULT);
             }
         }
         boolean validTime = false;
@@ -195,7 +182,7 @@ public class FinancialTracker {
                 timeFormatted = LocalTime.parse(time, TIME_FMT);
                 validTime = true;
             } catch (Exception e) {
-                System.out.println(RED + "Invalid Time. Use Format (HH:mm:ss)");
+                System.out.println(RED + "Invalid Time. Use Format (HH:mm:ss)"+ DEFAULT);
             }
         }
         System.out.println("Enter Description:");
@@ -212,12 +199,12 @@ public class FinancialTracker {
                 System.out.println("Enter Amount (greater than 0):");
                 amount = Double.parseDouble(scanner.nextLine());
                 if (amount <= 0){
-                    System.out.println(RED + "Invalid Number. Enter Positive.");
+                    System.out.println(RED + "Invalid Number. Enter Positive."+ DEFAULT);
                 } else {
                     goodAmount = true;
                 }
             } catch (NumberFormatException e) {
-                System.out.println(RED + "Invalid Input. Please Enter A Numeric Value");
+                System.out.println(RED + "Invalid Input. Please Enter A Numeric Value"+ DEFAULT);
             }
         }
 
@@ -230,7 +217,7 @@ public class FinancialTracker {
             System.out.println("Payment Recorded!");
             writer.close();
         } catch (IOException e) {
-            System.err.print(RED + "Error Writing To The File: " + FILE_NAME);
+            System.err.print(RED + "Error Writing To The File: " + FILE_NAME+ DEFAULT);
         }
     }
 
@@ -257,7 +244,7 @@ public class FinancialTracker {
                 case "P" -> displayPayments();
                 case "R" -> reportsMenu(scanner);
                 case "H" -> running = false;
-                default -> System.out.println(RED + "Invalid option");
+                default -> System.out.println(RED + "Invalid option"+ DEFAULT);
             }
         }
     }
@@ -278,10 +265,11 @@ public class FinancialTracker {
                         transaction.getAmount());
             }
         } catch (Exception ex) {
-            System.err.println(RED + "Error");
+            System.err.println(RED + "Error"+ DEFAULT);
         } }
 
-    //DISPLAY DEPOSITS
+
+    //DISPLAYS ONLY DEPOSITS
     private static void displayDeposits() {
         System.out.println();
         System.out.println(GREEN + "| DEPOSITS |" + DEFAULT);
@@ -300,7 +288,8 @@ public class FinancialTracker {
         }
     }
 
-    // DISPLAY PAYMENTS
+
+    // DISPLAY ONLY PAYMENTS
     private static void displayPayments() {
         System.out.println();
         System.out.println(GREEN + "| PAYMENTS |" + DEFAULT);
@@ -365,7 +354,7 @@ public class FinancialTracker {
                 }
                 case "6" -> customSearch(scanner);
                 case "0" -> running = false;
-                default -> System.out.println(RED + "Invalid Option");
+                default -> System.out.println(RED + "Invalid Option"+ DEFAULT);
             }
         }
     }
@@ -416,19 +405,19 @@ public class FinancialTracker {
         System.out.println();
         System.out.println(GREEN + "| CUSTOM-SEARCH MENU |" + DEFAULT);
 
-        System.out.print("Start date (yyyy-MM-dd, Leave Empty for None): ");
+        System.out.println("Start date (yyyy-MM-dd, Leave Empty for None): ");
         String stringStartDate = scanner.nextLine().trim();
 
-        System.out.print("Enter End date (yyyy-MM-dd, Leave Empty for None): ");
+        System.out.println("Enter End date (yyyy-MM-dd, Leave Empty for None): ");
         String stringEndDate = scanner.nextLine().trim();
 
-        System.out.print("Description (Leave Empty for None): ");
+        System.out.println("Description (Leave Empty for None): ");
         String description = scanner.nextLine();
 
-        System.out.print("Vendor (Leave Empty for None): ");
+        System.out.println("Vendor (Leave Empty for None): ");
         String vendor = scanner.nextLine();
 
-        System.out.print("Amount (Leave Empty for None): ");
+        System.out.println("Amount (Leave Empty for None): ");
         String amount = scanner.nextLine();
 
         Double finalAmount = null;
@@ -463,7 +452,7 @@ public class FinancialTracker {
                         transaction.getAmount());
             }
         } catch (Exception ex){
-            System.err.println(RED + "Error");
+            System.err.println(RED + "Error"+ DEFAULT);
         }
     }
 
