@@ -7,14 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/*
- * Capstone skeleton – personal finance tracker.
- * ------------------------------------------------
- * File format  (pipe-delimited)
- *     yyyy-MM-dd|HH:mm:ss|description|vendor|amount
- * A deposit has a positive amount; a payment is stored
- * as a negative amount.
- */
+
 public class FinancialTracker {
 
     /* ------------------------------------------------------------------
@@ -42,8 +35,8 @@ public class FinancialTracker {
         loadTransactions(FILE_NAME);
 
         Scanner scanner = new Scanner(System.in);
-        boolean run = true;
 
+        boolean run = true;
         while (run) {
             System.out.println(BLUE + "╔═══════════════════════════════════════════════╗");
             System.out.println(       "║  ┏━╸╻┏┓╻┏━┓┏┓╻┏━╸╻┏━┓╻  ╺┳╸┏━┓┏━┓┏━╸╻┏ ┏━╸┏━┓ ║\n" +
@@ -68,10 +61,6 @@ public class FinancialTracker {
         }
         scanner.close();
     }
-
-    /* ------------------------------------------------------------------
-       File I/O
-       ------------------------------------------------------------------ */
 
     /**
      * Load transactions from FILE_NAME.
