@@ -24,12 +24,12 @@ This application eliminates the need for manual record-keeping by offering a dig
 ### User Stories
 
 
-- As a user, I want to view all my transactions in a ledger, so I can easily review my financial activity in chronological order.
-- As a user, I want to add new deposits, so I can accurately track all income transactions.
-- As a user, I want to record new payments, so I can keep an organized record of all expenses.
-- As a user, I want to view reports based on specific dates, so I can analyze my transactions over different time periods.
-- As a user, I want to perform custom searches, so I can quickly find and filter specific transactions.
-- As a user, I want to see my transactions displayed in an organized list from newest to oldest, so it’s easier to read and review recent activity first.
+-As a user, I want to view all my transactions in a clear ledger, so I can easily review my financial activity in order.
+-As a user, I want to add new deposits, so I can keep an accurate record of all income.
+-As a user, I want to record new payments, so I can maintain an organized list of my expenses.
+-As a user, I want to generate reports for specific date ranges, so I can analyze my spending and income patterns over time.
+-As a user, I want to perform custom searches, so I can quickly locate and filter particular transactions.
+-As a user, I want my transactions displayed from newest to oldest, so it’s simple to view and review recent activity first.
 
 ### Prerequisites
 
