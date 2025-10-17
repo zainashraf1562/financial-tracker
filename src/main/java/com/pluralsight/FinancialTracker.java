@@ -78,6 +78,7 @@ public class FinancialTracker {
      * • If the file doesn’t exist, create an empty one so that future writes succeed.
      * • Each line looks like: date|time|description|vendor|amount
      */
+    //READ FILE add to object
     public static void loadTransactions(String fileName) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME));
@@ -110,6 +111,7 @@ public class FinancialTracker {
      * Validate that the amount entered is positive.
      * Store the amount as-is (positive) and append to the file.
      */
+    //ADD DEPOSIT
     private static void addDeposit(Scanner scanner) {
         LocalDate dateFormatted = null;
         LocalTime timeFormatted = null;
@@ -178,6 +180,7 @@ public class FinancialTracker {
      * Amount must be entered as a positive number,
      * then converted to a negative amount before storing.
      */
+    // ADD PAYMENT
     private static void addPayment(Scanner scanner) {
         System.out.println("FILL ALL VALUES!");
         LocalDate dateFormatted = null;
@@ -270,9 +273,7 @@ public class FinancialTracker {
         }
     }
 
-    /* ------------------------------------------------------------------
-       Display helpers: show data in neat columns
-       ------------------------------------------------------------------ */
+    //DISPLAY ALL TRANSACTIONS
     private static void displayLedger() {
         System.out.println();
         System.out.println(GREEN + "| ALL TRANSACTIONS |" + DEFAULT);
@@ -291,6 +292,7 @@ public class FinancialTracker {
             System.err.println(RED + "Error");
         } }
 
+    //DISPLAY DEPOSITS
     private static void displayDeposits() {
         System.out.println();
         System.out.println(GREEN + "| DEPOSITS |" + DEFAULT);
@@ -309,6 +311,7 @@ public class FinancialTracker {
         }
     }
 
+    // DISPLAY PAYMENTS
     private static void displayPayments() {
         System.out.println();
         System.out.println(GREEN + "| PAYMENTS |" + DEFAULT);
@@ -333,6 +336,7 @@ public class FinancialTracker {
     private static void reportsMenu(Scanner scanner) {
         boolean running = true;
         while (running) {
+            System.out.println();
             System.out.println(GREEN + "| REPORTS MENU |" +DEFAULT);
             System.out.println("Choose an option:");
             System.out.println("1) Month To Date");
@@ -377,9 +381,8 @@ public class FinancialTracker {
         }
     }
 
-    /* ------------------------------------------------------------------
-       Reporting helpers
-       ------------------------------------------------------------------ */
+
+    //FILTER BY DATE
     private static void filterTransactionsByDate(LocalDate start, LocalDate end) {
         System.out.println();
         System.out.println(GREEN + "| TRANSACTIONS BY DATE |" + DEFAULT);
@@ -399,6 +402,7 @@ public class FinancialTracker {
         }
     }
 
+    //FILTER BY VENDOR
     private static void filterTransactionsByVendor(String vendor) {
         System.out.println();
         System.out.println(GREEN + "| TRANSACTIONS BY VENDOR |" + DEFAULT);
@@ -418,6 +422,7 @@ public class FinancialTracker {
         }
     }
 
+    //CUSTOM SEARCH
     private static void customSearch(Scanner scanner) {
         System.out.println();
         System.out.println(GREEN + "| CUSTOM-SEARCH MENU |" + DEFAULT);
@@ -480,7 +485,6 @@ public class FinancialTracker {
         /* TODO – return LocalDate or null */
         return null;
     }
-
     private static Double parseDouble(String s) {
         /* TODO – return Double or null */
         return null;
